@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light" data-lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduGlobal - الرياضيات</title>
+  
+  <!-- الخطوط وأيقونات Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- إضافة أيقونات Google Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --secondary: #818cf8;
+      --accent: #f472b6;
+      --background: #f8fafc;
+      --text: #1e293b;
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --glass-bg: rgba(255, 255, 255, 0.25);
+      --border: rgba(203, 213, 225, 0.3);
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      /* الوضع الداكن */
+      --dark-primary: #818cf8;
+      --dark-primary-hover: #6366f1;
+      --dark-secondary: #a5b4fc;
+      --dark-accent: #f472b6;
+      --dark-background: #0f172a;
+      --dark-text: #f8fafc;
+      --dark-card-bg: rgba(15, 23, 42, 0.95);
+      --dark-glass-bg: rgba(15, 23, 42, 0.25);
+      --dark-border: rgba(71, 85, 105, 0.3);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+    body, * {
+      font-family: 'Cairo', sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+    [data-theme="dark"] {
+      --primary: var(--dark-primary);
+      --primary-hover: var(--dark-primary-hover);
+      --secondary: var(--dark-secondary);
+      --accent: var(--dark-accent);
+      --background: var(--dark-background);
+      --text: var(--dark-text);
+      --card-bg: var(--dark-card-bg);
+      --glass-bg: var(--dark-glass-bg);
+      --border: var(--dark-border);
+    }
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      padding: 1rem 0;
+    }
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo-container img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--primary);
+    }
+    .logo-text h1 {
+      font-size: 1.8rem;
+      color: var(--text);
+    }
+    .controls {
+      display: flex;
+      align-items: center;
+    }
+    .theme-toggle {
+      background: var(--glass-bg);
+      border: 1px solid var(--border);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: all 0.3s ease;
+    }
+    .theme-toggle:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+    /* استخدام أيقونات Google في زر تبديل الوضع */
+    .theme-toggle .material-icons {
+      font-size: 1.5rem;
+      color: var(--text);
+    }
+    /* Main Content */
+    main {
+      padding: 120px 2rem 4rem;
+      position: relative;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    /* Advanced Search */
+    .advanced-search {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      box-shadow: var(--shadow);
+    }
+    .advanced-search .search-box {
+      display: flex;
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      overflow: hidden;
+      background: transparent;
+    }
+    .advanced-search .search-box input {
+      flex: 1;
+      border: none;
+      padding: 10px 15px;
+      font-size: 1rem;
+      background: transparent;
+      color: var(--text);
+    }
+    .advanced-search .search-box input:focus {
+      outline: none;
+    }
+    .advanced-search .search-box button {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .advanced-search .search-box button:hover {
+      background: var(--primary-hover);
+    }
+    .advanced-search .search-box button .material-icons {
+      font-size: 1.2rem;
+    }
+    .advanced-search .filter-options {
+      margin-top: 15px;
+      text-align: center;
+    }
+    .advanced-search .filter-options .filter-btn {
+      background: #f0f0f0;
+      border: none;
+      padding: 8px 16px;
+      margin: 0 5px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+      font-size: 1rem;
+    }
+    .advanced-search .filter-options .filter-btn.active,
+    .advanced-search .filter-options .filter-btn:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+    /* Subject Sections */
+    .subject-section {
+      margin-bottom: 3rem;
+    }
+    .section-title {
+      font-size: 2rem;
+      color: var(--primary);
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .lesson-card {
+      background: var(--card-bg);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+    .lesson-header {
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+    }
+    .lesson-title {
+      font-size: 1.3rem;
+      color: var(--primary);
+    }
+    /* استخدام Google icon لتوسيع/طي */
+    .collapse-icon {
+      font-size: 1.5rem;
+      color: var(--primary);
+    }
+    .lesson-card.active .collapse-icon {
+      /* تغيير إلى رمز "expand_less" عند التوسيع */
+      font-family: 'Material Icons';
+      content: "expand_less";
+    }
+    .lesson-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: 0.3s ease;
+      padding: 0 1rem;
+    }
+    /* Video and PDF Lists */
+    .video-list, .pdf-list {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0;
+    }
+    .video-list li, .pdf-list li {
+      margin: 10px 0;
+    }
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 0.5rem;
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .pdf-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      color: var(--primary);
+      transition: background 0.2s ease;
+    }
+    .pdf-link:hover {
+      background: rgba(0,0,0,0.05);
+    }
+    /* PDF Modal */
+    .pdf-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    .pdf-modal-content {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 1rem;
+      text-align: center;
+    }
+    .pdf-modal-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+    .pdf-modal-btn {
+      padding: 0.8rem 1.5rem;
+      border-radius: 0.5rem;
+      border: none;
+      background: var(--primary);
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .pdf-modal-btn:hover {
+      transform: translateY(-2px);
+    }
+    /* Footer */
+    .footer {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      margin-top: 6rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav-container">
+      <div class="logo-container">
+        <img src="logo.png" alt="الشعار">
+        <div class="logo-text">
+          <h1>الرياضيات</h1>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="theme-toggle">
+          <span class="material-icons" id="themeIcon">brightness_4</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+  
+  <!-- Main Content -->
+  <main>
+    <!-- Advanced Search -->
+    <div class="advanced-search">
+      <div class="search-box">
+        <input type="text" placeholder="ابحث هنا..." id="searchInput">
+        <button id="searchBtn"><span class="material-icons">search</span></button>
+      </div>
+      <div class="filter-options">
+        <button class="filter-btn active" data-filter="all">الكل</button>
+        <button class="filter-btn" data-filter="exercises">تمارين</button>
+        <button class="filter-btn" data-filter="lessons">دروس</button>
+      </div>
+    </div>
+    
+    <!-- Section: Algebra -->
+    <section class="subject-section">
+      <h2 class="section-title"><span class='material-icons'>calculate</span> الجبر</h2>
+      
+      <!-- Lesson Card with multiple videos and exercises -->
+      <div class="lesson-card" data-category="exercises">
+        <div class="lesson-header">
+          <h3 class="lesson-title">المعادلات الخطية</h3>
+          <span class="material-icons collapse-icon">expand_more</span>
+        </div>
+        <div class="lesson-content">
+          <!-- Video List -->
+          <h4><span class='material-icons'>play_circle</span> فيديوهات الشرح</h4>
+          <ul class="video-list">
+            <li>
+              <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/2lLHWBZf6mk" allowfullscreen loading="lazy"></iframe>
+              </div>
+            </li>
+            <li>
+              <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/o8U_wtm83EY" allowfullscreen loading="lazy"></iframe>
+              </div>
+            </li>
+            <li>
+              <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/xyz12345678" allowfullscreen loading="lazy"></iframe>
+              </div>
+            </li>
+          </ul>
+          <!-- PDF List -->
+          <h4><span class='material-icons'>assignment</span> التمارين والاختبارات</h4>
+          <ul class="pdf-list">
+            <li class="pdf-item">
+              <a href="math-exercise1.pdf" class="pdf-link">
+                <span class="material-icons">download</span>
+                <span>تمرين 1 - معادلات خطية</span>
+              </a>
+            </li>
+            <li class="pdf-item">
+              <a href="math-exercise2.pdf" class="pdf-link">
+                <span class="material-icons">download</span>
+                <span>تمرين 2 - معادلات خطية</span>
+              </a>
+            </li>
+            <li class="pdf-item">
+              <a href="math-exercise3.pdf" class="pdf-link">
+                <span class="material-icons">download</span>
+                <span>تمرين 3 - معادلات خطية</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Section: Geometry -->
+    <section class="subject-section">
+      <h2 class="section-title"><span class='material-icons'>square_foot</span> الهندسة</h2>
+      
+      <!-- Lesson Card with multiple videos and exercises -->
+      <div class="lesson-card" data-category="lessons">
+        <div class="lesson-header">
+          <h3 class="lesson-title">نظرية فيثاغورس</h3>
+          <span class="material-icons collapse-icon">expand_more</span>
+        </div>
+        <div class="lesson-content">
+          <!-- Video List -->
+          <h4><span class='material-icons'>play_circle</span> فيديوهات الشرح</h4>
+          <ul class="video-list">
+            <li>
+              <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/2lLHWBZf6mk" allowfullscreen loading="lazy"></iframe>
+              </div>
+            </li>
+            <li>
+              <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/o8U_wtm83EY" allowfullscreen loading="lazy"></iframe>
+              </div>
+            </li>
+          </ul>
+          <!-- PDF List -->
+          <h4><span class='material-icons'>assignment</span> التمارين والاختبارات</h4>
+          <ul class="pdf-list">
+            <li class="pdf-item">
+              <a href="geometry-exercise1.pdf" class="pdf-link">
+                <span class="material-icons">download</span>
+                <span>تمرين 1 - فيثاغورس</span>
+              </a>
+            </li>
+            <li class="pdf-item">
+              <a href="geometry-exercise2.pdf" class="pdf-link">
+                <span class="material-icons">download</span>
+                <span>تمرين 2 - فيثاغورس</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2024 EduGlobal. جميع الحقوق محفوظة</p>
+  </footer>
+  
+  <!-- PDF Modal -->
+  <div class="pdf-modal" id="pdfModal">
+    <div class="pdf-modal-content">
+      <h2>اختر الإجراء المطلوب</h2>
+      <div class="pdf-modal-actions">
+        <button class="pdf-modal-btn" id="downloadBtn">
+          <span class="material-icons">download</span> تنزيل
+        </button>
+        <button class="pdf-modal-btn" id="readBtn">
+          <span class="material-icons">menu_book</span> قراءة
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- JavaScript -->
+  <script>
+    // تبديل الوضع (الفاتح/الداكن)
+    const themeToggle = document.querySelector('.theme-toggle');
+    const themeIcon = document.getElementById('themeIcon');
+    themeToggle.addEventListener('click', function() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      // تغيير الأيقونة حسب الوضع
+      themeIcon.innerText = newTheme === 'dark' ? 'brightness_high' : 'brightness_4';
+    });
+    
+    // نظام توسيع/طي محتوى الدرس مع تغيير رمز التوسيع باستخدام Google icons
+    document.querySelectorAll('.lesson-header').forEach(header => {
+      header.addEventListener('click', function() {
+        const lessonCard = this.parentElement;
+        const content = lessonCard.querySelector('.lesson-content');
+        const icon = this.querySelector('.collapse-icon');
+        const isActive = lessonCard.classList.toggle('active');
+        content.style.maxHeight = isActive ? content.scrollHeight + "px" : 0;
+        icon.innerText = isActive ? 'expand_less' : 'expand_more';
+      });
+    });
+    
+    // نظام إدارة ملفات PDF
+    let currentPdf = '';
+    const pdfLinks = document.querySelectorAll('.pdf-link');
+    const pdfModal = document.getElementById('pdfModal');
+    
+    pdfLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        currentPdf = this.href;
+        pdfModal.style.display = 'flex';
+      });
+    });
+    
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      const a = document.createElement('a');
+      a.href = currentPdf;
+      a.download = currentPdf.split('/').pop();
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      pdfModal.style.display = 'none';
+    });
+    
+    document.getElementById('readBtn').addEventListener('click', () => {
+      window.open(currentPdf, '_blank', 'noopener,noreferrer');
+      pdfModal.style.display = 'none';
+    });
+    
+    window.addEventListener('click', (e) => {
+      if (e.target === pdfModal) {
+        pdfModal.style.display = 'none';
+      }
+    });
+    
+    // Advanced search and filter functionality
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    let currentFilter = 'all';
+    
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentFilter = this.getAttribute('data-filter');
+        applyFilters();
+      });
+    });
+    
+    const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.getElementById('searchBtn');
+    
+    searchBtn.addEventListener('click', applyFilters);
+    searchInput.addEventListener('keyup', applyFilters);
+    
+    function applyFilters() {
+      const query = searchInput.value.toLowerCase().trim();
+      const lessonCards = document.querySelectorAll('*');
+      lessonCards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        const category = card.getAttribute('data-category');
+        if (text.includes(query) && (currentFilter === 'all' || category === currentFilter)) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+  </script>
+</body>
+</html>

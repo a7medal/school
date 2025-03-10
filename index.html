@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light" data-lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduGlobal - التعليم العالمي</title>
+  
+  <!-- الخطوط -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- أيقونات Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      /* نظام الألوان الحديث */
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --secondary: #818cf8;
+      --accent: #f472b6;
+      --background: #f8fafc;
+      --text: #1e293b;
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --glass-bg: rgba(255, 255, 255, 0.25);
+      --border: rgba(203, 213, 225, 0.3);
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      
+      /* الوضع الداكن */
+      --dark-primary: #818cf8;
+      --dark-primary-hover: #6366f1;
+      --dark-secondary: #a5b4fc;
+      --dark-accent: #f472b6;
+      --dark-background: #0f172a;
+      --dark-text: #f8fafc;
+      --dark-card-bg: rgba(15, 23, 42, 0.95);
+      --dark-glass-bg: rgba(15, 23, 42, 0.25);
+      --dark-border: rgba(71, 85, 105, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* نظام الوضع الداكن */
+    [data-theme="dark"] {
+      --primary: var(--dark-primary);
+      --primary-hover: var(--dark-primary-hover);
+      --secondary: var(--dark-secondary);
+      --accent: var(--dark-accent);
+      --background: var(--dark-background);
+      --text: var(--dark-text);
+      --card-bg: var(--dark-card-bg);
+      --glass-bg: var(--dark-glass-bg);
+      --border: var(--dark-border);
+    }
+
+    /* نظام اللغة الفرنسية */
+    [data-lang="fr"] {
+      font-family: 'Inter', sans-serif;
+      direction: ltr;
+    }
+
+    /* تصميم الهيدر الحديث */
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      padding: 1rem 0;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    /* تعديل حاوية الشعار لتكون أفقية وإضافة النص */
+    .logo-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .logo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--primary);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: rotate(15deg) scale(1.05);
+    }
+    
+    .logo-text {
+      font-size: 1.6rem; /* تكبير حجم النص */
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .theme-toggle {
+      background: var(--glass-bg);
+      border: 1px solid var(--border);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .theme-toggle i {
+      font-size: 1.5rem;
+      color: var(--text);
+    }
+
+    .lang-switcher {
+      display: flex;
+      gap: 0.5rem;
+      background: var(--glass-bg);
+      padding: 0.5rem;
+      border-radius: 2rem;
+      border: 1px solid var(--border);
+    }
+
+    .lang-btn {
+      padding: 0.5rem 1.25rem;
+      border-radius: 2rem;
+      border: none;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .lang-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* المحتوى الرئيسي مع تأثير البارالاكس */
+    main {
+      padding: 220px 2rem 4rem; /* زيادة المسافة العلوية لتفادي تغطية الهيدر */
+      position: relative;
+    }
+
+    .courses-grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .course-card {
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .course-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    .course-card:hover {
+      transform: translateY(-8px);
+      color: white;
+    }
+
+    .course-card:hover::before {
+      opacity: 1;
+    }
+
+    .course-card:hover .card-icon {
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .course-card:hover .card-link {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .card-desc {
+      opacity: 0.9;
+      margin-bottom: 2rem;
+      flex-grow: 1;
+      font-size: 0.95rem;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--glass-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 12px;
+      font-weight: 600;
+      width: fit-content;
+      backdrop-filter: blur(4px);
+      transition: all 0.3s ease;
+    }
+
+    .card-link i {
+      font-size: 0.9rem;
+    }
+
+    /* تصميم الفوتر الحديث */
+    .footer {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      margin-top: 6rem;
+      text-align: center;
+    }
+
+    /* تأثيرات الخلفية الديناميكية */
+    .background-effects {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .gradient-circle {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.15;
+    }
+
+    .circle-1 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--primary), transparent);
+      top: 20%;
+      left: 10%;
+      animation: float 8s infinite;
+    }
+
+    .circle-2 {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, var(--accent), transparent);
+      top: 60%;
+      right: 15%;
+      animation: float 6s infinite 2s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-40px) rotate(10deg); }
+    }
+
+    /* التنسيق للجوال */
+    @media (max-width: 768px) {
+      .nav-container {
+        padding: 0 1rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .logo {
+        width: 80px;
+        height: 80px;
+      }
+
+      .logo-text {
+        font-size: 1.4rem;
+      }
+
+      .lang-switcher {
+        order: 2;
+        width: 100;
+      }
+
+      main {
+        padding: 180px 1rem 2rem; /* زيادة المسافة العلوية للجوال */
+      }
+
+      .courses-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+   .about-us {
+  position: relative;
+  background: linear-gradient(135deg, rgba(99,102,241,0.85), rgba(129,140,248,0.85));
+  color: #fff;
+  border-radius: 20px;
+  padding: 4rem 2rem;
+  margin: 2rem auto;
+  max-width: 1400px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.about-us::before,
+.about-us::after {
+  content: "";
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.about-us::before {
+  top: -50px;
+  right: -50px;
+}
+
+.about-us::after {
+  bottom: -50px;
+  left: -50px;
+  animation-direction: reverse;
+}
+
+@keyframes float {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(15deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+.about-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.about-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.about-description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  max-width: 800px;
+  margin: 0 auto;
+}
+  .about-us {
+  position: relative;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.85), rgba(129, 140, 248, 0.85));
+  color: #fff;
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 1400px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.about-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.about-title {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.toggle-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.about-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out, opacity 0.5s;
+  opacity: 0;
+}
+
+.about-us.active .about-content {
+  max-height: 200px; /* يمكن تعديل الارتفاع حسب المحتوى */
+  opacity: 1;
+}
+
+.about-us.active .toggle-btn {
+  transform: rotate(180deg);
+}
+  </style>
+</head>
+<body>
+  <!-- تأثيرات الخلفية -->
+  <div class="background-effects">
+    <div class="gradient-circle circle-1"></div>
+    <div class="gradient-circle circle-2"></div>
+  </div>
+
+  <header class="header">
+    <nav class="nav-container">
+      <div class="logo-container">
+        <img src="logo.png" alt="EduGlobal Logo" class="logo">
+        <span class="logo-text">موقع أحمدال التعليمي</span>
+      </div>
+      
+      <div class="controls">
+        <div class="lang-switcher">
+          <button class="lang-btn active" data-lang="ar">العربية</button>
+          <button class="lang-btn" data-lang="fr">Français</button>
+        </div>
+        <button class="theme-toggle">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
+  <br>
+  <main>
+    <!-- قسم "من نحن" القابل للطي -->
+<section class="about-us">
+  <div class="about-header">
+    <h2 class="about-title">من نحن</h2>
+    <button class="toggle-btn">
+      <i class="fas fa-chevron-down"></i>
+    </button>
+  </div>
+  <div class="about-content">
+    <p class="about-description">
+      أنشأ الطالب أحمدال ولد أحمدبدى هذا الموقع ليكون نافذة ملهمة للتعلم، حيث يجمع بين التقنية والابتكار لمنح التلاميذ تجربة تعليمية ممتعة ومثرية.
+
+
+
+    </p>
+  </div>
+</section>
+    <div class="courses-grid">
+      <!-- سيتم تعبئة البطاقات عبر الجافاسكريبت -->
+    </div>
+    <!-- قسم "من نحن" الفريد -->
+
+  </main>
+
+  <footer class="footer">
+    <p data-translate="footer">© 2024 EduGlobal. جميع الحقوق محفوظة</p>
+  </footer>
+
+  <script>
+    // نظام المحتوى مع تحسينات
+    const content = {
+      ar: {
+        title: "EduGlobal - بوابة التعليم الذكي",
+        courses: [
+          {
+            icon: "fa-calculator",
+            title: "الرياضيات ",
+            desc: "انطلق في رحلة تعلم الرياضيات عبر مناهج تفاعلية ثلاثية الأبعاد",
+            link: "math.html"
+          },
+          {
+            icon: "fa-atom",
+            title: "الفيزياء",
+            desc: "اكتشف أسرار الكون من خلال محاكاة فيزيائية واقعية",
+            link: "physics.html"
+          },
+          {
+            icon: "fa-dna",
+            title: "علم الأحياء",
+            desc: "استكشاف الكائنات الحية عبر معارض افتراضية تفاعلية",
+            link: "biology.html"
+          },
+          {
+            icon: "fa-flask",
+            title: "الكيمياء",
+            desc: "تجارب معملية افتراضية مع محاكاة دقيقة للتفاعلات",
+            link: "chemistry.html"
+          }
+        ],
+        footer: "© 2024 EduGlobal. جميع الحقوق محفوظة"
+      },
+      fr: {
+        title: "EduGlobal - Plateforme Éducative",
+        courses: [
+          {
+            icon: "fa-calculator",
+            title: "Maths Avancées",
+            desc: "Apprentissage interactif en 3D avec simulations",
+            link: "math.html"
+          },
+          {
+            icon: "fa-atom",
+            title: "Physique Quantique",
+            desc: "Découvrez les secrets de l'univers via des simulations",
+            link: "physics.html"
+          },
+          {
+            icon: "fa-dna",
+            title: "Biologie Moderne",
+            desc: "Explorez la vie à travers des laboratoires virtuels",
+            link: "biology.html"
+          },
+          {
+            icon: "fa-flask",
+            title: "Chimie Interactive",
+            desc: "Expériences virtuelles avec réactions réalistes",
+            link: "chemistry.html"
+          }
+        ],
+        footer: "© 2024 EduGlobal. Tous droits réservés"
+      }
+    };
+
+    // توليد البطاقات مع تأثيرات
+    function generateCourses(lang) {
+      const grid = document.querySelector('.courses-grid');
+      grid.innerHTML = '';
+      
+      content[lang].courses.forEach(course => {
+        const card = document.createElement('a');
+        card.className = 'course-card';
+        card.href = course.link;
+        card.innerHTML = `
+          <i class="fas ${course.icon} card-icon"></i>
+          <h3 class="card-title">${course.title}</h3>
+          <p class="card-desc">${course.desc}</p>
+          <div class="card-link">
+            ${lang === 'ar' ? 'ابدأ الرحلة' : 'Commencer'}
+            <i class="fas fa-arrow-${lang === 'ar' ? 'left' : 'right'}"></i>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // وظائف التحكم
+    function switchLanguage(lang) {
+      document.documentElement.setAttribute('data-lang', lang);
+      document.title = content[lang].title;
+      
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+      
+      document.querySelector('[data-translate="footer"]').textContent = content[lang].footer;
+      generateCourses(lang);
+    }
+
+    function toggleTheme() {
+      const theme = document.documentElement.getAttribute('data-theme');
+      const newTheme = theme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      document.querySelector('.theme-toggle i').className = 
+        newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    }
+
+    // تهيئة الصفحة
+    document.addEventListener('DOMContentLoaded', () => {
+      generateCourses('ar');
+      
+      document.querySelector('.theme-toggle').addEventListener('click', toggleTheme);
+      
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => switchLanguage(btn.dataset.lang));
+      });
+    });
+   
+  document.addEventListener("DOMContentLoaded", function () {
+    const aboutSection = document.querySelector(".about-us");
+    const toggleBtn = document.querySelector(".toggle-btn");
+
+    aboutSection.addEventListener("click", function () {
+      aboutSection.classList.toggle("active");
+    });
+  });
+
+  </script>
+</body>
+</html>
