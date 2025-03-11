@@ -1,555 +1,125 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-theme="light" data-lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>الفيزياء - Ahmedal</title>
-  <!-- الخطوط وأيقونات Font Awesome وGoogle Material Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <title>المحتوى قادم قريباً</title>
+  <!-- استخدام خط Cairo -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #6366f1;
       --primary-hover: #4f46e5;
-      --secondary: #818cf8;
-      --accent: #f472b6;
-      --background: #f8fafc;
+      --background: linear-gradient(135deg, #f8fafc, #e2e8f0);
       --text: #1e293b;
-      --card-bg: rgba(255, 255, 255, 0.95);
-      --glass-bg: rgba(255, 255, 255, 0.25);
-      --border: rgba(203, 213, 225, 0.3);
-      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-      /* الوضع الداكن */
-      --dark-primary: #818cf8;
-      --dark-primary-hover: #6366f1;
-      --dark-secondary: #a5b4fc;
-      --dark-accent: #f472b6;
-      --dark-background: #0f172a;
-      --dark-text: #f8fafc;
-      --dark-card-bg: rgba(15, 23, 42, 0.95);
-      --dark-glass-bg: rgba(15, 23, 42, 0.25);
-      --dark-border: rgba(71, 85, 105, 0.3);
+      --card-bg: #ffffff;
+      --shadow: rgba(0, 0, 0, 0.1);
     }
-    /* تطبيق خط Cairo على جميع العناصر */
+    /* تعيين الإعدادات الأساسية */
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      transition: all 0.3s ease;
       font-family: 'Cairo', sans-serif;
     }
     body {
       background: var(--background);
       color: var(--text);
-      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       min-height: 100vh;
-      position: relative;
-      overflow-x: hidden;
-    }
-    [data-theme="dark"] {
-      --primary: var(--dark-primary);
-      --primary-hover: var(--dark-primary-hover);
-      --secondary: var(--dark-secondary);
-      --accent: var(--dark-accent);
-      --background: var(--dark-background);
-      --text: var(--dark-text);
-      --card-bg: var(--dark-card-bg);
-      --glass-bg: var(--dark-glass-bg);
-      --border: var(--dark-border);
-    }
-    /* Header */
-    .header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      z-index: 1000;
-      padding: 1rem 0;
-    }
-    .nav-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    .logo-container img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--primary);
-    }
-    .logo-text h1 {
-      font-size: 1.8rem;
-      color: var(--text);
-    }
-    .controls {
-      display: flex;
-      align-items: center;
-    }
-    .theme-toggle {
-      background: var(--glass-bg);
-      border: 1px solid var(--border);
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: grid;
-      place-items: center;
-    }
-    .theme-toggle:hover {
-      background: var(--primary);
-      border-color: var(--primary);
-    }
-    .theme-toggle .material-icons {
-      font-size: 1.5rem;
-      color: var(--text);
-    }
-    /* Main Content */
-    main {
-      padding: 120px 2rem 4rem;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-    /* Advanced Search - بدون عوامل التصفية */
-    .advanced-search {
-      max-width: 800px;
-      margin: 20px auto;
+      text-align: center;
       padding: 20px;
+    }
+    header {
+      margin-bottom: 20px;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      letter-spacing: 1px;
+      animation: fadeInDown 1s ease forwards;
+      opacity: 0;
+    }
+    @keyframes fadeInDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .coming-soon {
       background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 1rem;
-      box-shadow: var(--shadow);
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px var(--shadow);
+      padding: 40px 30px;
+      max-width: 600px;
+      width: 100%;
+      animation: fadeIn 1s ease forwards;
+      opacity: 0;
     }
-    .advanced-search .search-box {
-      flex: 1;
-      display: flex;
-      border: 1px solid var(--border);
-      border-radius: 1rem;
-      overflow: hidden;
-      background: transparent;
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
     }
-    .advanced-search .search-box input {
-      flex: 1;
-      border: none;
-      padding: 10px 15px;
-      font-size: 1rem;
-      background: transparent;
-      color: var(--text);
+    .coming-soon h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: var(--primary);
+      letter-spacing: 1px;
     }
-    .advanced-search .search-box input:focus {
-      outline: none;
+    .coming-soon p {
+      font-size: 1.3rem;
+      margin-bottom: 30px;
     }
-    .advanced-search .search-box button {
+    .back-btn {
+      display: inline-block;
       background: var(--primary);
       color: #fff;
-      border: none;
-      padding: 10px 15px;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-    .advanced-search .search-box button:hover {
-      background: var(--primary-hover);
-    }
-    .advanced-search .search-box button .material-icons {
-      font-size: 1.2rem;
-    }
-    /* Subject Sections */
-    .subject-section {
-      margin-bottom: 3rem;
-    }
-    .section-title {
-      font-size: 2rem;
-      color: var(--primary);
-      border-bottom: 2px solid var(--primary);
-      padding-bottom: 0.5rem;
-      margin-bottom: 1.5rem;
-    }
-    .lesson-card {
-      background: var(--card-bg);
-      border-radius: 1rem;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      box-shadow: var(--shadow);
-    }
-    .lesson-header {
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem;
-    }
-    .lesson-title {
-      font-size: 1.3rem;
-      color: var(--primary);
-    }
-    .collapse-icon {
-      font-size: 1.5rem;
-      color: var(--primary);
-    }
-    .lesson-card.active .collapse-icon {
-      font-family: 'Material Icons';
-      content: "expand_less";
-    }
-    .lesson-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: 0.3s ease;
-      padding: 0 1rem;
-    }
-    .video-list, .pdf-list {
-      list-style: none;
-      padding: 0;
-      margin: 10px 0;
-    }
-    .video-list li, .pdf-list li {
-      margin: 10px 0;
-    }
-    .video-wrapper {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-      border-radius: 0.5rem;
-    }
-    .video-wrapper iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-    .pdf-link {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem;
-      border-radius: 0.5rem;
+      padding: 12px 30px;
+      border-radius: 30px;
       text-decoration: none;
-      color: var(--primary);
-      transition: background 0.2s ease;
+      font-size: 1.1rem;
+      transition: transform 0.3s ease, background 0.3s ease;
     }
-    .pdf-link:hover {
-      background: rgba(0,0,0,0.05);
+    .back-btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-3px);
     }
-    /* Footer */
-    .footer {
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      border-top: 1px solid var(--border);
-      padding: 2rem;
-      margin-top: 6rem;
-      text-align: center;
+    footer {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: var(--text);
     }
-  /* CSS */
-.header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(203, 213, 225, 0.3);
-  padding: 1rem 0;
-  z-index: 1000;
-}
-
-.nav-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo-container {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.logo-container img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #6366f1;
-}
-
-.logo-text h1 {
-  font-size: 1.8rem;
-  color: #1e293b;
-}
-
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-/* زر الصفحة الرئيسية */
-.home-button {
-  background-color: #6366f1; /* اللون الأساسي */
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.home-button:hover {
-  background-color: #4f46e5; /* لون عند المرور */
-  transform: scale(1.05);
-}
-
-/* زر تبديل الوضع */
-.theme-toggle {
-  background: rgba(255, 255, 255, 0.25);
-  border: 1px solid rgba(203, 213, 225, 0.3);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.theme-toggle:hover {
-  background: #6366f1;
-  border-color: #6366f1;
-}
-
-.theme-toggle .material-icons {
-  font-size: 1.5rem;
-  color: #1e293b;
-}
-  .home-button {
-  background-color: #6366f1; /* اللون الأساسي */
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  text-decoration: none; /* لإزالة الخط السفلي الافتراضي */
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.home-button:hover {
-  background-color: #4f46e5; /* لون عند المرور */
-  transform: scale(1.05);
-}
-  [data-theme="dark"] .logo-text h1 {
-  color: #f8fafc;
-}
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      .coming-soon h1 {
+        font-size: 2.5rem;
+      }
+      .coming-soon p {
+        font-size: 1.1rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- Header -->
-  <!-- HTML -->
-<header class="header">
-  <nav class="nav-container">
-    <div class="logo-container">
-      <img src="logo.png" alt="الشعار">
-      <div class="logo-text">
-        <h1>الرياضيات</h1>
-      </div>
-    </div>
-<!-- HTML: زر الصفحة الرئيسية كرابط -->
-<a href="index.html" class="home-button" aria-label="الصفحة الرئيسية">
-  <span class="material-icons">home</span>
-</a>
-      <button class="theme-toggle" aria-label="تبديل الوضع">
-        <span class="material-icons" id="themeIcon">brightness_4</span>
-      </button>
-    </div>
-  </nav>
-</header>
-        </div>
-      </div>
-      <div class="controls">
-        <button class="theme-toggle">
-          <span class="material-icons" id="themeIcon">brightness_4</span>
-        </button>
-      </div>
-    </nav>
+  <header>
+    <h1>Ahmedal School</h1>
   </header>
-  <!-- Main Content -->
-  <main>
-    <!-- Advanced Search بدون عوامل التصفية -->
-    <div class="advanced-search">
-      <div class="search-box">
-        <input type="text" placeholder="ابحث هنا في كل المحتوى..." id="searchInput">
-        <button id="searchBtn"><span class="material-icons">search</span></button>
-      </div>
-    </div>
-    <!-- Section: Algebra -->
-    <section class="subject-section">
-      <h2 class="section-title">Algebre</h2>
-      <div class="lesson-card">
-        <div class="lesson-header">
-          <h3 class="lesson-title">Chapitre Etude de Fonction</h3>
-          <span class="material-icons collapse-icon">expand_more</span>
-        </div>
-        <div class="lesson-content">
-          <!-- أيقونات مدمجة مع العناوين داخل البطاقات -->
-          <h4>
-            <span class="material-icons" style="vertical-align: middle;">live_tv</span>
-            فيديوهات الشرح
-          </h4>
-          <ul class="video-list">
-            <li>
-              <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/2lLHWBZf6mk" allowfullscreen loading="lazy"></iframe>
-              </div>
-            </li>
-            <li>
-              <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/o8U_wtm83EY" allowfullscreen loading="lazy"></iframe>
-              </div>
-            </li>
-            <li>
-              <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/xyz12345678" allowfullscreen loading="lazy"></iframe>
-              </div>
-            </li>
-          </ul>
-          <h4>
-            <span class="material-icons" style="vertical-align: middle;">assignment</span>
-            التمارين والاختبارات
-          </h4>
-          <ul class="pdf-list">
-            <li class="pdf-item">
-              <a href="math-exercise1.pdf" class="pdf-link">
-                <span class="material-icons">download</span>
-                <span>تمرين 1 - معادلات خطية</span>
-              </a>
-            </li>
-            <li class="pdf-item">
-              <a href="math-exercise2.pdf" class="pdf-link">
-                <span class="material-icons">download</span>
-                <span>تمرين 2 - معادلات خطية</span>
-              </a>
-            </li>
-            <li class="pdf-item">
-              <a href="math-exercise3.pdf" class="pdf-link">
-                <span class="material-icons">download</span>
-                <span>تمرين 3 - معادلات خطية</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-    
-  </main>
-  <!-- Footer -->
-  <footer class="footer">
-    <p>© 2024 EduGlobal. جميع الحقوق محفوظة</p>
-  </footer>
-  <!-- PDF Modal -->
-  <div class="pdf-modal" id="pdfModal" style="display:none;">
-    <div class="pdf-modal-content">
-      <h2>اختر الإجراء المطلوب</h2>
-      <div class="pdf-modal-actions">
-        <button class="pdf-modal-btn" id="downloadBtn">
-          <span class="material-icons">download</span> تنزيل
-        </button>
-        <button class="pdf-modal-btn" id="readBtn">
-          <span class="material-icons">menu_book</span> قراءة
-        </button>
-      </div>
-    </div>
+  <div class="coming-soon">
+    <h1>قريباً</h1>
+    <p>.....سيتم إضافة محتوى هذه المادة قريباً. .</p>
+    <a href="index.html" class="back-btn">العودة إلى الرئيسية</a>
   </div>
-  <!-- JavaScript -->
-  <script>
-    // تبديل الوضع (الفاتح/الداكن)
-    const themeToggle = document.querySelector('.theme-toggle');
-    const themeIcon = document.getElementById('themeIcon');
-    themeToggle.addEventListener('click', function() {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', newTheme);
-      themeIcon.innerText = newTheme === 'dark' ? 'brightness_high' : 'brightness_4';
-    });
-    // نظام التوسيع/الطي لمحتوى الدرس
-    document.querySelectorAll('.lesson-header').forEach(header => {
-      header.addEventListener('click', function() {
-        const lessonCard = this.parentElement;
-        const content = lessonCard.querySelector('.lesson-content');
-        const icon = this.querySelector('.collapse-icon');
-        const isActive = lessonCard.classList.toggle('active');
-        content.style.maxHeight = isActive ? content.scrollHeight + "px" : 0;
-        icon.innerText = isActive ? 'expand_less' : 'expand_more';
-      });
-    });
-    // إدارة ملفات PDF
-    let currentPdf = '';
-    const pdfLinks = document.querySelectorAll('.pdf-link');
-    const pdfModal = document.getElementById('pdfModal');
-    pdfLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        currentPdf = this.href;
-        pdfModal.style.display = 'flex';
-      });
-    });
-    document.getElementById('downloadBtn').addEventListener('click', () => {
-      const a = document.createElement('a');
-      a.href = currentPdf;
-      a.download = currentPdf.split('/').pop();
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      pdfModal.style.display = 'none';
-    });
-    document.getElementById('readBtn').addEventListener('click', () => {
-      window.open(currentPdf, '_blank', 'noopener,noreferrer');
-      pdfModal.style.display = 'none';
-    });
-    window.addEventListener('click', (e) => {
-      if (e.target === pdfModal) {
-        pdfModal.style.display = 'none';
-      }
-    });
-    // وظيفة البحث في جميع المحتويات داخل منطقة main
-    const searchInput = document.getElementById('searchInput');
-    const searchBtn = document.getElementById('searchBtn');
-    function applySearch() {
-      const query = searchInput.value.toLowerCase().trim();
-      const lessonCards = document.querySelectorAll('main .lesson-card');
-      lessonCards.forEach(card => {
-        const text = card.innerText.toLowerCase();
-        card.style.display = text.includes(query) ? "block" : "none";
-      });
-    }
-    searchBtn.addEventListener('click', applySearch);
-    searchInput.addEventListener('keyup', applySearch);
-  </script>
+  <footer>
+    © 2024 EduGlobal. جميع الحقوق محفوظة.
+  </footer>
 </body>
 </html>
