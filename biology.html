@@ -1,13 +1,125 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="ar" dir="rtl">
 <head>
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
-  <title>Hello, World!</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المحتوى قادم قريباً</title>
+  <!-- استخدام خط Cairo -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+      --text: #1e293b;
+      --card-bg: #ffffff;
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
+    /* تعيين الإعدادات الأساسية */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+    }
+    body {
+      background: var(--background);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+    header {
+      margin-bottom: 20px;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      letter-spacing: 1px;
+      animation: fadeInDown 1s ease forwards;
+      opacity: 0;
+    }
+    @keyframes fadeInDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .coming-soon {
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 8px 16px var(--shadow);
+      padding: 40px 30px;
+      max-width: 600px;
+      width: 100%;
+      animation: fadeIn 1s ease forwards;
+      opacity: 0;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .coming-soon h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+    .coming-soon p {
+      font-size: 1.3rem;
+      margin-bottom: 30px;
+    }
+    .back-btn {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      padding: 12px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    .back-btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-3px);
+    }
+    footer {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      .coming-soon h1 {
+        font-size: 2.5rem;
+      }
+      .coming-soon p {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>
-    Hello, World!
-  </h1>
+  <header>
+    <h1>Ahmedal School</h1>
+  </header>
+  <div class="coming-soon">
+    <h1>قريباً</h1>
+    <p>.....سيتم إضافة محتوى هذه المادة قريباً. .</p>
+    <a href="index.html" class="back-btn">العودة إلى الرئيسية</a>
+  </div>
+  <footer>
+    © 2024 EduGlobal. جميع الحقوق محفوظة.
+  </footer>
 </body>
 </html>
